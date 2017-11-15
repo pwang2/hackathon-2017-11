@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,500,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./style/site.css">
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="drawer" v-cloak>
+    <div class="desc">Flights Leaving</div>
+    <div class="desc-airport-info">{{selectedAirport.iata}} - {{selectedAirport.airportname}}</div>
+    <ul class="stat-info-list">
+      <li class="stat-info-item" v-for="(stat,type) in selectedAirportStats">
+        <div class="legend" :style="{backgroundColor:categories[type].color }"></div>
+        <div class="stat-info">
+          <div class="pct">{{stat.pct}} % </div>
+          <div class="legend-label">{{categories[type].label}}</div>
+        </div>
+      </li>
+    </ul>
+
+    <hr>
+    <div class="desc">Delayed Flights By Origin Airport</div>
+    <ul class="airport-delay-list">
+      <li class="airport-delay-item" v-for="airport in airportDelayList">
+        <div class="delay-airport-iata">{{airport.iata}}</div>
+        <div class="delay-bar"
+          :style="{width:delayScale*airport.delaynum+'px'}"></div>
+        {{airport.delaynum}}
+      </li>
+    </ul>
+  </div>
+</body>
